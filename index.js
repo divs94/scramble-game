@@ -4,8 +4,7 @@ const btn = document.querySelector(".btn");
 let play = false;
 let newWords = "";
 let randomWords = "";
-let sWords = ["Mango", "Colour", "Elephant", "Annonymous", "Design", "Knowladge", "Watch", "Hotspot", "reactjs", "angular",
-    "swift", "android", "Sqqurille", "Samsung", "India", "Fox"];
+let sWords = ["mango", "elephant", "design", "knowladge", "watch", "hotspot", "reactjs", "india", "fox"];
 
 
 const createNewWords = () => {
@@ -15,7 +14,7 @@ const createNewWords = () => {
 }
 
 const scrambleWords = (arr) => {
-    for (let i = arr.length - 1; i >0; i--){
+    for (let i = arr.length - 1; i > 0; i--) {
         let temp = arr[i];
         let j = Math.floor(Math.random() * (i + 1));
         arr[i] = arr[j];
@@ -31,21 +30,24 @@ btn.addEventListener("click", function () {
         btn.innerHTML = "Guess";
         guess.classList.toggle("hidden");
         newWords = createNewWords();
-       randomWords = scrambleWords(newWords.split("")).join("");  //split method convert a string into array//
-        msg.innerHTML = `Guess the Word: ${ randomWords}`;                             // join method joint splitted and scrambled words together//
+        randomWords = scrambleWords(newWords.split("")).join("");  //split method convert a string into array//
+        msg.innerHTML = `Guess the Word: ${randomWords}`;                             // join method joint splitted and scrambled words together//
     }
     else {
         let tempWord = guess.value;
         if (tempWord === newWords) {
-            play = false;
+            play = true;
             msg.innerHTML = `Awesome You are Correct, It is ${newWords}`;
             btn.innerHTML = "Next";
             guess.classList.toggle("hidden");
             guess.value = "";
         }
         else {
-            msg.innerHTML = `OOppss!!! You are Incorrect, It is ${randomWords}`;
+            msg.innerHTML = `OOppss!!! You are Incorrect, It is ${newWords}`;
             btn.innerHTML = "Try Again";
+            
+            
+
         }
     }
 });
